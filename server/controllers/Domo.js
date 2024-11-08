@@ -6,7 +6,6 @@ const makerPage = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
     const docs = await Domo.find(query).select('name age').lean().exec();
-    console.log(query);
     return res.render('app', { domos: docs });
   } catch (err) {
     console.log(err);
@@ -25,7 +24,6 @@ const makeDomo = async (req, res) => {
   };
   try {
     const newDomo = new Domo(domoData);
-    console.log(newDomo);
     await newDomo.save();
     return res.json({ redirect: '/maker' });
   } catch (err) {
